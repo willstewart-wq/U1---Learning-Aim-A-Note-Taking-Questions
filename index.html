@@ -178,6 +178,13 @@
             border: 1px solid #f5c6cb;
         }
 
+        /* NEW UNATTEMPTED STYLING */
+        .feedback-unattempted {
+            background-color: #e9ecef;
+            color: #495057;
+            border: 1px solid #ced4da;
+        }
+
         .model-answer {
             font-weight: normal;
             margin-top: 5px;
@@ -198,21 +205,6 @@
             display: none;
             z-index: 1000;
         }
-
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin: 10px 0;
-            font-size: 14px;
-        }
-
-        th, td {
-            border: 1px solid #ddd;
-            padding: 8px;
-            text-align: left;
-        }
-
-        th { background-color: #f2f2f2; }
     </style>
 </head>
 <body>
@@ -246,21 +238,21 @@
 
         <div class="question-block" id="q_block_1_1">
             <div class="question-title">Q1.1: Bone Remodelling (Osteoclasts & Osteoblasts)</div>
-            <div class="question-desc">Summarise the processes of bone destruction and new bone formation stimulated by weight-bearing exercise.</div>
+            <div class="question-desc">Summarise the processes of bone destruction and new bone formation stimulated by weight-bearing exercise.[cite: 1]</div>
             <textarea id="q1_1" placeholder="Write your answer here..." oninput="autoSave()"></textarea>
             <div class="feedback-box" id="fb_1_1"></div>
         </div>
 
         <div class="question-block" id="q_block_1_2">
             <div class="question-title">Q1.2: Synovial Fluid Adaptations</div>
-            <div class="question-desc">Explain three acute responses of synovial fluid during exercise and their benefits to joints.</div>
+            <div class="question-desc">Explain three acute responses of synovial fluid during exercise and their benefits to joints.[cite: 1]</div>
             <textarea id="q1_2" placeholder="Write your answer here..." oninput="autoSave()"></textarea>
             <div class="feedback-box" id="fb_1_2"></div>
         </div>
 
         <div class="question-block" id="q_block_1_3">
             <div class="question-title">Q1.3: Mineral Uptake & Bone Mineral Density</div>
-            <div class="question-desc">How does weight-bearing exercise affect mineral uptake and bone density over time? Give examples of suitable exercises.</div>
+            <div class="question-desc">How does weight-bearing exercise affect mineral uptake and bone density over time? Give examples of suitable exercises.[cite: 1]</div>
             <textarea id="q1_3" placeholder="Write your answer here..." oninput="autoSave()"></textarea>
             <div class="feedback-box" id="fb_1_3"></div>
         </div>
@@ -272,28 +264,28 @@
 
         <div class="question-block" id="q_block_2_1">
             <div class="question-title">Q2.1: Muscle Fibre Recruitment & Ramping Effect</div>
-            <div class="question-desc">Explain the order of muscle fibre recruitment (ramping effect) and state why 100% of muscle fibres are never recruited at once.</div>
+            <div class="question-desc">Explain the order of muscle fibre recruitment (ramping effect) and state why 100% of muscle fibres are never recruited at once.[cite: 1]</div>
             <textarea id="q2_1" placeholder="Write your answer here..." oninput="autoSave()"></textarea>
             <div class="feedback-box" id="fb_2_1"></div>
         </div>
 
         <div class="question-block" id="q_block_2_2">
             <div class="question-title">Q2.2: Application — 800m Race Muscle Fibre Usage</div>
-            <div class="question-desc">Explain which muscle fibre types (Type I, Type IIa, Type IIx) an athlete uses during an 800m race and justify why.</div>
+            <div class="question-desc">Explain which muscle fibre types (Type I, Type IIa, Type IIx) an athlete uses during an 800m race and justify why.[cite: 1]</div>
             <textarea id="q2_2" placeholder="Write your answer here..." oninput="autoSave()"></textarea>
             <div class="feedback-box" id="fb_2_2"></div>
         </div>
 
         <div class="question-block" id="q_block_2_3">
             <div class="question-title">Q2.3: Vascular Shunting Mechanism (VSM)</div>
-            <div class="question-desc">Detail WHAT vascular shunting is, WHY it happens during exercise, and HOW the Vasomotor Centre (VMC), vasoconstriction, and vasodilation control it.</div>
+            <div class="question-desc">Detail WHAT vascular shunting is, WHY it happens during exercise, and HOW the Vasomotor Centre (VMC), vasoconstriction, and vasodilation control it.[cite: 1]</div>
             <textarea id="q2_3" placeholder="Write your answer here..." oninput="autoSave()"></textarea>
             <div class="feedback-box" id="fb_2_3"></div>
         </div>
 
         <div class="question-block" id="q_block_2_4">
             <div class="question-title">Q2.4: Post-Meal Energy & Fast Food Scenario</div>
-            <div class="question-desc">Why do you feel full, tired, and sleepy after eating a large meal (e.g. McDonald's) before or after exercise?</div>
+            <div class="question-desc">Why do you feel full, tired, and sleepy after eating a large meal (e.g. McDonald's) before or after exercise?[cite: 1]</div>
             <textarea id="q2_4" placeholder="Write your answer here..." oninput="autoSave()"></textarea>
             <div class="feedback-box" id="fb_2_4"></div>
         </div>
@@ -421,7 +413,7 @@
 <div class="status-bar" id="statusBar">Progress saved</div>
 
 <script>
-    // Marking engine configurations with key terms, acceptable alternatives, and fuzzy spelling tolerance
+    // Marking engine configurations
     const markingRules = {
         q1_1: {
             requiredTerms: [
@@ -594,7 +586,6 @@
         }
     };
 
-    // Auto-save function
     function autoSave() {
         saveToLocalStorage(false);
     }
@@ -640,7 +631,6 @@
         }
     }
 
-    // Levenshtein distance for fuzzy matching/spelling tolerance
     function levenshteinDistance(a, b) {
         if (a.length === 0) return b.length;
         if (b.length === 0) return a.length;
@@ -669,10 +659,8 @@
         const words = cleanText.split(/\W+/);
         const target = targetTerm.toLowerCase();
 
-        // Exact substring match
         if (cleanText.includes(target)) return true;
 
-        // Fuzzy match on individual words (allowing distance up to 2 for words >= 5 chars)
         for (let word of words) {
             if (word.length >= 4 && target.length >= 4) {
                 const dist = levenshteinDistance(word, target);
@@ -682,16 +670,29 @@
         return false;
     }
 
-    // Interactive marking function
+    // UPDATED MARKING FUNCTION
     function markAllQuestions() {
         let totalScore = 0;
-        let maxScore = Object.keys(markingRules).length;
+        let attemptedCount = 0;
+        let totalQuestions = Object.keys(markingRules).length;
 
         for (let qKey in markingRules) {
             const rule = markingRules[qKey];
-            const text = document.getElementById(qKey).value;
+            const textInput = document.getElementById(qKey);
+            const text = textInput ? textInput.value.trim() : '';
             const fbBox = document.getElementById('fb_' + qKey.replace('q', ''));
 
+            fbBox.style.display = 'block';
+
+            // CHECK IF QUESTION IS UNANSWERED / BLANK
+            if (!text || text.length === 0) {
+                fbBox.className = 'feedback-box feedback-unattempted';
+                fbBox.innerHTML = '<strong>⚠️ Not Attempted</strong> — Please write an answer before marking to check your response and see the model answer.';
+                continue; // Skip evaluation and do not show model answer
+            }
+
+            // QUESTION HAS BEEN ATTEMPTED
+            attemptedCount++;
             let matchedCategories = 0;
             let requiredCategoriesCount = rule.requiredTerms.length;
 
@@ -704,8 +705,6 @@
                 });
                 if (categoryMatched) matchedCategories++;
             });
-
-            fbBox.style.display = 'block';
 
             if (matchedCategories === requiredCategoriesCount) {
                 totalScore++;
@@ -723,9 +722,14 @@
 
         const overallDiv = document.getElementById('overallScore');
         overallDiv.style.display = 'block';
-        const percentage = Math.round((totalScore / maxScore) * 100);
         const studentName = document.getElementById('studentName').value || 'Student';
-        overallDiv.innerHTML = `Assessment Results for ${studentName}: ${totalScore} / ${maxScore} (${percentage}%)`;
+
+        if (attemptedCount === 0) {
+            overallDiv.innerHTML = `Assessment Results for ${studentName}: No questions attempted yet. Please complete some answers and click mark again!`;
+        } else {
+            const percentage = Math.round((totalScore / attemptedCount) * 100);
+            overallDiv.innerHTML = `Assessment Results for ${studentName}: ${totalScore} / ${attemptedCount} attempted questions marked (${percentage}%). <br><span style="font-size:13px; font-weight:normal; color:#555;">Completed: ${attemptedCount} of ${totalQuestions} questions.</span>`;
+        }
 
         window.scrollTo({ top: overallDiv.offsetTop - 20, behavior: 'smooth' });
     }
@@ -778,7 +782,6 @@
         window.open("https://docs.google.com/document/d/1zYWP_78vCHe0eD6poYzTj77WEF0RU4qEZKkjzmm8Xj0/edit?usp=drive_web", "_blank");
     }
 
-    // Load saved progress on page start
     window.onload = function() {
         loadFromLocalStorage();
     };
