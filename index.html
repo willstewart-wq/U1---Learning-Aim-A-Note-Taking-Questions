@@ -1,0 +1,788 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BTEC Sport Science Unit 1: Learning Aim A - Interactive Revision Guide</title>
+    <style>
+        :root {
+            --primary-color: #0056b3;
+            --secondary-color: #28a745;
+            --background-color: #f4f7f9;
+            --card-bg: #ffffff;
+            --text-color: #333333;
+            --border-color: #cccccc;
+            --accent-color: #17a2b8;
+        }
+
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            line-height: 1.6;
+            background-color: var(--background-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: var(--card-bg);
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        header {
+            border-bottom: 3px solid var(--primary-color);
+            padding-bottom: 15px;
+            margin-bottom: 25px;
+        }
+
+        h1 {
+            color: var(--primary-color);
+            margin-bottom: 5px;
+            font-size: 26px;
+        }
+
+        h2 {
+            color: #444;
+            font-size: 18px;
+            margin-top: 0;
+        }
+
+        .student-info {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+            background: #e9ecef;
+            padding: 15px;
+            border-radius: 6px;
+            margin-bottom: 25px;
+            flex-wrap: wrap;
+        }
+
+        .student-info label {
+            font-weight: bold;
+        }
+
+        .student-info input {
+            padding: 8px 12px;
+            font-size: 15px;
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            flex-grow: 1;
+            min-width: 250px;
+        }
+
+        .toolbar {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+
+        button {
+            padding: 10px 18px;
+            font-size: 14px;
+            font-weight: bold;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.2s ease;
+            color: white;
+        }
+
+        .btn-save { background-color: var(--primary-color); }
+        .btn-save:hover { background-color: #004085; }
+
+        .btn-mark { background-color: var(--secondary-color); }
+        .btn-mark:hover { background-color: #218838; }
+
+        .btn-download { background-color: var(--accent-color); }
+        .btn-download:hover { background-color: #117a8b; }
+
+        .btn-gdoc { background-color: #6f42c1; }
+        .btn-gdoc:hover { background-color: #59359a; }
+
+        .section-card {
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 25px;
+            background: #fafafa;
+        }
+
+        .section-card h3 {
+            margin-top: 0;
+            color: var(--primary-color);
+            border-bottom: 2px solid #ddd;
+            padding-bottom: 8px;
+        }
+
+        .question-block {
+            margin-bottom: 20px;
+            background: #ffffff;
+            padding: 15px;
+            border-radius: 6px;
+            border-left: 4px solid var(--primary-color);
+        }
+
+        .question-title {
+            font-weight: bold;
+            margin-bottom: 8px;
+            color: #222;
+        }
+
+        .question-desc {
+            font-size: 14px;
+            color: #555;
+            margin-bottom: 10px;
+        }
+
+        textarea {
+            width: 100%;
+            height: 90px;
+            padding: 10px;
+            font-family: inherit;
+            font-size: 14px;
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            box-sizing: border-box;
+            resize: vertical;
+        }
+
+        .feedback-box {
+            margin-top: 10px;
+            padding: 10px 15px;
+            border-radius: 4px;
+            display: none;
+            font-size: 14px;
+        }
+
+        .feedback-correct {
+            background-color: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+
+        .feedback-partial {
+            background-color: #fff3cd;
+            color: #856404;
+            border: 1px solid #ffeeba;
+        }
+
+        .feedback-incorrect {
+            background-color: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+
+        .model-answer {
+            font-weight: normal;
+            margin-top: 5px;
+            font-style: italic;
+            color: #333;
+        }
+
+        .status-bar {
+            position: fixed;
+            bottom: 15px;
+            right: 15px;
+            background: #333;
+            color: white;
+            padding: 10px 18px;
+            border-radius: 20px;
+            font-size: 13px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+            display: none;
+            z-index: 1000;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 10px 0;
+            font-size: 14px;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+
+        th { background-color: #f2f2f2; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <header>
+        <h1>BTEC Extended Diploma in Sport & Exercise Science - Year 2</h1>
+        <h2>Unit 1: Sport & Exercise Physiology — Unit Content A: Acute Responses to Exercise</h2>
+        <p><i>Interactive Online Revision Guide & Self-Assessment Tool</i></p>
+    </header>
+
+    <div class="student-info">
+        <label for="studentName">Student Full Name:</label>
+        <input type="text" id="studentName" placeholder="Enter your full name here..." oninput="autoSave()">
+        <span id="saveStatus" style="font-size:12px; color:#666;">Auto-save active</span>
+    </div>
+
+    <div class="toolbar">
+        <button class="btn-mark" onclick="markAllQuestions()">Mark My Work & Check Answers</button>
+        <button class="btn-save" onclick="saveToLocalStorage(true)">Save Progress</button>
+        <button class="btn-download" onclick="downloadJSON()">Download Backup (.json)</button>
+        <button class="btn-download" onclick="downloadSummaryHTML()">Download Report (.html)</button>
+        <button class="btn-gdoc" onclick="openGoogleDoc()">Open / Download Google Doc</button>
+    </div>
+
+    <div id="overallScore" style="display:none; background:#e2e3e5; padding:15px; border-radius:6px; margin-bottom:20px; font-weight:bold; font-size:16px;"></div>
+
+    <!-- SECTION 1: SKELETAL SYSTEM -->
+    <div class="section-card">
+        <h3>1. Skeletal System (Initial Responses to Weight-Bearing Exercise)</h3>
+
+        <div class="question-block" id="q_block_1_1">
+            <div class="question-title">Q1.1: Bone Remodelling (Osteoclasts & Osteoblasts)</div>
+            <div class="question-desc">Summarise the processes of bone destruction and new bone formation stimulated by weight-bearing exercise.</div>
+            <textarea id="q1_1" placeholder="Write your answer here..." oninput="autoSave()"></textarea>
+            <div class="feedback-box" id="fb_1_1"></div>
+        </div>
+
+        <div class="question-block" id="q_block_1_2">
+            <div class="question-title">Q1.2: Synovial Fluid Adaptations</div>
+            <div class="question-desc">Explain three acute responses of synovial fluid during exercise and their benefits to joints.</div>
+            <textarea id="q1_2" placeholder="Write your answer here..." oninput="autoSave()"></textarea>
+            <div class="feedback-box" id="fb_1_2"></div>
+        </div>
+
+        <div class="question-block" id="q_block_1_3">
+            <div class="question-title">Q1.3: Mineral Uptake & Bone Mineral Density</div>
+            <div class="question-desc">How does weight-bearing exercise affect mineral uptake and bone density over time? Give examples of suitable exercises.</div>
+            <textarea id="q1_3" placeholder="Write your answer here..." oninput="autoSave()"></textarea>
+            <div class="feedback-box" id="fb_1_3"></div>
+        </div>
+    </div>
+
+    <!-- SECTION 2: MUSCULAR SYSTEM -->
+    <div class="section-card">
+        <h3>2. Muscular System Responses</h3>
+
+        <div class="question-block" id="q_block_2_1">
+            <div class="question-title">Q2.1: Muscle Fibre Recruitment & Ramping Effect</div>
+            <div class="question-desc">Explain the order of muscle fibre recruitment (ramping effect) and state why 100% of muscle fibres are never recruited at once.</div>
+            <textarea id="q2_1" placeholder="Write your answer here..." oninput="autoSave()"></textarea>
+            <div class="feedback-box" id="fb_2_1"></div>
+        </div>
+
+        <div class="question-block" id="q_block_2_2">
+            <div class="question-title">Q2.2: Application — 800m Race Muscle Fibre Usage</div>
+            <div class="question-desc">Explain which muscle fibre types (Type I, Type IIa, Type IIx) an athlete uses during an 800m race and justify why.</div>
+            <textarea id="q2_2" placeholder="Write your answer here..." oninput="autoSave()"></textarea>
+            <div class="feedback-box" id="fb_2_2"></div>
+        </div>
+
+        <div class="question-block" id="q_block_2_3">
+            <div class="question-title">Q2.3: Vascular Shunting Mechanism (VSM)</div>
+            <div class="question-desc">Detail WHAT vascular shunting is, WHY it happens during exercise, and HOW the Vasomotor Centre (VMC), vasoconstriction, and vasodilation control it.</div>
+            <textarea id="q2_3" placeholder="Write your answer here..." oninput="autoSave()"></textarea>
+            <div class="feedback-box" id="fb_2_3"></div>
+        </div>
+
+        <div class="question-block" id="q_block_2_4">
+            <div class="question-title">Q2.4: Post-Meal Energy & Fast Food Scenario</div>
+            <div class="question-desc">Why do you feel full, tired, and sleepy after eating a large meal (e.g. McDonald's) before or after exercise?</div>
+            <textarea id="q2_4" placeholder="Write your answer here..." oninput="autoSave()"></textarea>
+            <div class="feedback-box" id="fb_2_4"></div>
+        </div>
+
+        <div class="question-block" id="q_block_2_5">
+            <div class="question-title">Q2.5: Micro-Tears, Temperature & Muscle Pliability</div>
+            <div class="question-desc">Explain how micro-tears occur, how muscle heating increases pliability, and how this reduces injury risk.[cite: 1]</div>
+            <textarea id="q2_5" placeholder="Write your answer here..." oninput="autoSave()"></textarea>
+            <div class="feedback-box" id="fb_2_5"></div>
+        </div>
+    </div>
+
+    <!-- SECTION 3: RESPIRATORY SYSTEM -->
+    <div class="section-card">
+        <h3>3. Respiratory System Responses</h3>
+
+        <div class="question-block" id="q_block_3_1">
+            <div class="question-title">Q3.1: Neural & Chemical Control of Breathing</div>
+            <div class="question-desc">Explain the role of the Medulla Oblongata (DRG/VRG) and Chemoreceptors (aortic/carotid bodies detecting CO2/pH/H+ ions) in controlling respiration.[cite: 1]</div>
+            <textarea id="q3_1" placeholder="Write your answer here..." oninput="autoSave()"></textarea>
+            <div class="feedback-box" id="fb_3_1"></div>
+        </div>
+
+        <div class="question-block" id="q_block_3_2">
+            <div class="question-title">Q3.2: Respiratory Volumes (TV, f, VE, Alveolar Ventilation)</div>
+            <div class="question-desc">Define Tidal Volume (TV), Breathing Frequency (f), Minute Ventilation (VE = TV x f), and Alveolar Ventilation (VA). Provide resting and exercise values.[cite: 1]</div>
+            <textarea id="q3_2" placeholder="Write your answer here..." oninput="autoSave()"></textarea>
+            <div class="feedback-box" id="fb_3_2"></div>
+        </div>
+
+        <div class="question-block" id="q_block_3_3">
+            <div class="question-title">Q3.3: Minute Ventilation (VE) Responses to Exercise</div>
+            <div class="question-desc">Explain the phases of VE response during sub-maximal (steady state) vs maximal exercise (anticipatory rise, rapid increase, plateau/continuous rise, recovery).[cite: 1]</div>
+            <textarea id="q3_3" placeholder="Write your answer here..." oninput="autoSave()"></textarea>
+            <div class="feedback-box" id="fb_3_3"></div>
+        </div>
+
+        <div class="question-block" id="q_block_3_4">
+            <div class="question-title">Q3.4: Mechanics of Inspiration & Expiration (Rest vs Exercise)</div>
+            <div class="question-desc">Describe the mechanics of breathing during forced exercise, specifying accessory muscles used during inspiration (scalenes, sternocleidomastoid, pectoralis minor) and expiration (internal intercostals, abdominals).[cite: 1]</div>
+            <textarea id="q3_4" placeholder="Write your answer here..." oninput="autoSave()"></textarea>
+            <div class="feedback-box" id="fb_3_4"></div>
+        </div>
+
+        <div class="question-block" id="q_block_3_5">
+            <div class="question-title">Q3.5: Oxyhaemoglobin Dissociation Curve & The Bohr Effect</div>
+            <div class="question-desc">Explain what the Bohr Effect/Shift is and state the three physiological factors that cause the curve to shift to the right during exercise.[cite: 1]</div>
+            <textarea id="q3_5" placeholder="Write your answer here..." oninput="autoSave()"></textarea>
+            <div class="feedback-box" id="fb_3_5"></div>
+        </div>
+    </div>
+
+    <!-- SECTION 4: CARDIOVASCULAR SYSTEM -->
+    <div class="section-card">
+        <h3>4. Cardiovascular System Responses</h3>
+
+        <div class="question-block" id="q_block_4_1">
+            <div class="question-title">Q4.1: Key Cardiac Parameters & Autonomic Control</div>
+            <div class="question-desc">Define HR, SV, and Cardiac Output (Q = HR x SV). Explain how the Sympathetic and Parasympathetic nervous systems regulate the Sinoatrial Node (SAN).[cite: 1]</div>
+            <textarea id="q4_1" placeholder="Write your answer here..." oninput="autoSave()"></textarea>
+            <div class="feedback-box" id="fb_4_1"></div>
+        </div>
+
+        <div class="question-block" id="q_block_4_2">
+            <div class="question-title">Q4.2: Stroke Volume, Venous Return & Starling's Law</div>
+            <div class="question-desc">Explain why SV plateaus at 50-60% Max HR and explain Starling's Law of the Heart in relation to venous return and stretch.[cite: 1]</div>
+            <textarea id="q4_2" placeholder="Write your answer here..." oninput="autoSave()"></textarea>
+            <div class="feedback-box" id="fb_4_2"></div>
+        </div>
+
+        <div class="question-block" id="q_block_4_3">
+            <div class="question-title">Q4.3: Blood Pressure Responses & Isometric Exercise</div>
+            <div class="question-desc">Compare Systolic and Diastolic blood pressure responses during dynamic aerobic exercise versus maximal isometric strength training.[cite: 1]</div>
+            <textarea id="q4_3" placeholder="Write your answer here..." oninput="autoSave()"></textarea>
+            <div class="feedback-box" id="fb_4_3"></div>
+        </div>
+
+        <div class="question-block" id="q_block_4_4">
+            <div class="question-title">Q4.4: Blood pH, a-VO2 Diff & Diffusion Rate</div>
+            <div class="question-desc">Explain how blood pH changes during intense exercise and describe the factors that increase Arteriovenous Oxygen Difference (a-VO2 diff).[cite: 1]</div>
+            <textarea id="q4_4" placeholder="Write your answer here..." oninput="autoSave()"></textarea>
+            <div class="feedback-box" id="fb_4_4"></div>
+        </div>
+    </div>
+
+    <!-- SECTION 5: NERVOUS & ENDOCRINE SYSTEMS -->
+    <div class="section-card">
+        <h3>5. Nervous & Endocrine System Responses</h3>
+
+        <div class="question-block" id="q_block_5_1">
+            <div class="question-title">Q5.1: Proprioceptors (Muscle Spindles & Golgi Tendon Organs)</div>
+            <div class="question-desc">Compare the roles of Muscle Spindles and Golgi Tendon Organs (GTOs) in regulating muscle stretch, tension, and injury prevention.[cite: 1]</div>
+            <textarea id="q5_1" placeholder="Write your answer here..." oninput="autoSave()"></textarea>
+            <div class="feedback-box" id="fb_5_1"></div>
+        </div>
+
+        <div class="question-block" id="q_block_5_2">
+            <div class="question-title">Q5.2: Endocrine Hormonal Responses</div>
+            <div class="question-desc">Detail the key physiological actions during exercise for: Adrenaline, Noradrenaline, Cortisol, Testosterone, and HGH.[cite: 1]</div>
+            <textarea id="q5_2" placeholder="Write your answer here..." oninput="autoSave()"></textarea>
+            <div class="feedback-box" id="fb_5_2"></div>
+        </div>
+    </div>
+
+    <!-- SECTION 6: ENERGY SYSTEMS -->
+    <div class="section-card">
+        <h3>6. Energy Systems</h3>
+
+        <div class="question-block" id="q_block_6_1">
+            <div class="question-title">Q6.1: ATP-PC, Lactic Acid & Aerobic Energy Systems</div>
+            <div class="question-desc">Compare the 3 energy systems regarding fuel, site/enzymes, ATP yield, duration, and fatiguing by-products.[cite: 1]</div>
+            <textarea id="q6_1" placeholder="Write your answer here..." oninput="autoSave()"></textarea>
+            <div class="feedback-box" id="fb_6_1"></div>
+        </div>
+
+        <div class="question-block" id="q_block_6_2">
+            <div class="question-title">Q6.2: Energy Continuum Application — 1500m Race</div>
+            <div class="question-desc">Break down the energy system contributions across the phases of a 1500m race (50m, 350m, 700m, 300m, 100m sprint finish).[cite: 1]</div>
+            <textarea id="q6_2" placeholder="Write your answer here..." oninput="autoSave()"></textarea>
+            <div class="feedback-box" id="fb_6_2"></div>
+        </div>
+    </div>
+</div>
+
+<div class="status-bar" id="statusBar">Progress saved</div>
+
+<script>
+    // Marking engine configurations with key terms, acceptable alternatives, and fuzzy spelling tolerance
+    const markingRules = {
+        q1_1: {
+            requiredTerms: [
+                ['osteoclast', 'osteoclasts', 'destroy', 'resorb', 'breakdown'],
+                ['osteoblast', 'osteoblasts', 'build', 'develop', 'new bone', 'formation'],
+                ['weight-bearing', 'pulling force', 'muscle pull', 'mechanical stress', 'exercise']
+            ],
+            modelAnswer: "Osteoclasts destroy/resorb older or damaged bone tissue. Weight-bearing exercise creates pulling forces from muscles on bone, which stimulates osteoblast activity to form new bone."
+        },
+        q1_2: {
+            requiredTerms: [
+                ['synovial membrane', 'secretion', 'increased production', 'more fluid'],
+                ['viscosity', 'less viscous', 'thinner', 'range of movement', 'rom'],
+                ['lubricat', 'protect', 'articular cartilage', 'nutrients']
+            ],
+            modelAnswer: "Synovial fluid production increases from the synovial membrane. It becomes less viscous (thinner), increasing joint range of movement. It lubricates joints and supplies nutrients to articular cartilage."
+        },
+        q1_3: {
+            requiredTerms: [
+                ['calcium', 'mineral', 'uptake'],
+                ['density', 'bone mineral density', 'bmd', 'stronger'],
+                ['weightlifting', 'running', 'weight-bearing', 'impact']
+            ],
+            modelAnswer: "Exercise causes increased uptake of minerals like calcium into bones, ultimately increasing bone mineral density. Weight-bearing exercises like running and weightlifting are key."
+        },
+        q2_1: {
+            requiredTerms: [
+                ['ramping', 'ramping effect', 'type i', 'type iia', 'type iix', 'slow twitch', 'fast twitch'],
+                ['demand', 'intensity', 'force required'],
+                ['prevent damage', 'avoid injury', 'fraction', 'never all']
+            ],
+            modelAnswer: "Fibre recruitment follows the ramping effect: Type I -> Type IIa -> Type IIx depending on demand. Only a fraction of fibres are recruited at once to avoid muscle damage and injury."
+        },
+        q2_2: {
+            requiredTerms: [
+                ['type i', 'slow twitch', 'aerobic', 'endurance'],
+                ['type iia', 'fast twitch', 'fog', 'moderate force'],
+                ['type iix', 'maximal force', 'sprint finish', 'lactate', 'fatigue']
+            ],
+            modelAnswer: "Uses all 3 types: Type I for long duration aerobic pace, Type IIa for sustained moderate force, and Type IIx for high-intensity bursts and the final sprint finish."
+        },
+        q2_3: {
+            requiredTerms: [
+                ['redistribution', 'diversion', 'non-essential', 'working muscle'],
+                ['vasomotor', 'vmc', 'medulla oblongata'],
+                ['vasoconstriction', 'constrict', 'pre-capillary sphincters close'],
+                ['vasodilation', 'dilate', 'pre-capillary sphincters open']
+            ],
+            modelAnswer: "Vascular shunting diverts blood from non-vital organs to working muscles. The Vasomotor Centre (VMC) in the medulla signals vasoconstriction/sphincter closure to non-vital organs and vasodilation/sphincter opening to active muscles."
+        },
+        q2_4: {
+            requiredTerms: [
+                ['digestion', 'digestive system', 'stomach', 'gut'],
+                ['shunted', 'blood diverted', 'vascular shunt'],
+                ['muscles', 'brain', 'sluggish', 'tired']
+            ],
+            modelAnswer: "After eating, blood is shunted towards the digestive organs to process food, reducing blood flow to skeletal muscles and brain, causing feelings of tiredness and full/sluggish sensations."
+        },
+        q2_5: {
+            requiredTerms: [
+                ['micro-tear', 'microtears', 'stress', 'overload', 'swelling'],
+                ['heat', 'temperature', 'breakdown of fuel'],
+                ['pliability', 'flexibility', 'reduce injury', 'warm up']
+            ],
+            modelAnswer: "Repeated contractions create micro-tears, causing swelling/pain; repair leads to muscle growth. Increased muscle temperature enhances muscle pliability/flexibility, reducing injury risk."
+        },
+        q3_1: {
+            requiredTerms: [
+                ['medulla oblongata', 'drg', 'vrg', 'respiratory center'],
+                ['chemoreceptor', 'chemoreceptors', 'aortic', 'carotid'],
+                ['carbon dioxide', 'co2', 'ph', 'acidity', 'hydrogen ions', 'h+']
+            ],
+            modelAnswer: "Medulla oblongata (DRG/VRG) controls breathing involuntarily. Chemoreceptors in aorta/carotid arteries detect drops in blood pH / increased CO2 and signal the respiratory centre to increase breathing rate and depth."
+        },
+        q3_2: {
+            requiredTerms: [
+                ['tidal volume', 'tv', '500ml', '3-4'],
+                ['breathing frequency', 'rate', '12-15', '40-60'],
+                ['minute ventilation', 've', '6', '120', '180']
+            ],
+            modelAnswer: "TV: 500ml rest -> 3-4L exercise. Frequency: 12-15 rest -> 40-60 breaths/min. Minute Volume (VE = TV x f): 6-7.5 L/min rest -> 120-180 L/min exercise. Alveolar Ventilation (VA) = (TV - Deadspace) x f."
+        },
+        q3_3: {
+            requiredTerms: [
+                ['anticipatory rise', 'adrenaline'],
+                ['rapid rise', 'receptors', 'hormones'],
+                ['steady state', 'plateau', 'maximal', 'co2']
+            ],
+            modelAnswer: "Sub-maximal: Anticipatory rise (adrenaline) -> rapid rise at start -> steady state plateau (O2 demand meets supply). Maximal: Anticipatory rise -> rapid increase -> continuous slower rise driven by rising CO2 levels."
+        },
+        q3_4: {
+            requiredTerms: [
+                ['diaphragm', 'external intercostal', 'thoracic cavity'],
+                ['scalene', 'sternocleidomastoid', 'pectoralis minor'],
+                ['internal intercostal', 'abdominals', 'rectus abdominis']
+            ],
+            modelAnswer: "Inspiration: Diaphragm and external intercostals contract; scalenes, sternocleidomastoid, and pectoralis minor assist in exercise. Expiration: Active during exercise using internal intercostals and abdominals."
+        },
+        q3_5: {
+            requiredTerms: [
+                ['bohr effect', 'bohr shift', 'right', 'dissociation', 'release oxygen'],
+                ['co2', 'carbon dioxide', 'lactic acid', 'acidity', 'ph'],
+                ['temperature', 'heat']
+            ],
+            modelAnswer: "The Bohr shift is a rightward shift of the oxyhaemoglobin dissociation curve, enhancing oxygen release to muscles. Caused by: 1) Increased CO2/lactic acid, 2) Decreased blood pH (increased acidity), 3) Increased muscle temperature."
+        },
+        q4_1: {
+            requiredTerms: [
+                ['heart rate', 'hr', 'stroke volume', 'sv', 'cardiac output', 'q'],
+                ['sympathetic', 'adrenaline', 'noradrenaline', 'increase hr'],
+                ['parasympathetic', 'acetylcholine', 'decrease hr', 'snoatrial node', 'san']
+            ],
+            modelAnswer: "HR: beats/min; SV: volume/beat; Q = HR x SV. Sympathetic system releases adrenaline/noradrenaline to stimulate SAN and raise HR. Parasympathetic system releases acetylcholine to lower HR."
+        },
+        q4_2: {
+            requiredTerms: [
+                ['plateau', '50-60%', 'filling time', 'viscosity'],
+                ['starling', 'starlings law', 'venous return'],
+                ['stretch', 'forceful contraction']
+            ],
+            modelAnswer: "SV plateaus at 50-60% Max HR due to reduced filling time during diastole and increased blood viscosity from sweating. Starling's Law states greater venous return increases cardiac chamber stretch, producing a more forceful contraction."
+        },
+        q4_3: {
+            requiredTerms: [
+                ['systolic', 'increases', 'rises'],
+                ['diastolic', 'remains same', 'slightly decreases'],
+                ['isometric', 'holding breath', 'valsalva', 'rises significantly', 'pressure']
+            ],
+            modelAnswer: "Aerobic exercise: Systolic BP increases with intensity; Diastolic BP stays constant or slightly drops. Isometric training: Both Systolic and Diastolic BP rise sharply due to muscle compression on blood vessels and breath holding (Valsalva)."
+        },
+        q4_4: {
+            requiredTerms: [
+                ['ph drop', 'acidic', 'co2', 'lactic acid'],
+                ['a-vo2 diff', 'arteriovenous', 'extraction'],
+                ['temperature', 'bohr shift', 'diffusion gradient']
+            ],
+            modelAnswer: "Blood pH drops below 7.0 (becomes acidic) due to CO2 and lactic acid/H+. a-VO2 diff increases as working muscles extract more oxygen from arterial blood, facilitated by higher temperature, Bohr shift, and steeper diffusion gradients."
+        },
+        q5_1: {
+            requiredTerms: [
+                ['muscle spindle', 'spindles', 'stretch', 'stretch reflex', 'intrafusal'],
+                ['golgi tendon', 'gto', 'tension', 'force', 'inhibit']
+            ],
+            modelAnswer: "Muscle Spindles detect the speed/degree of muscle stretch and initiate a reflex contraction to prevent tears. Golgi Tendon Organs (GTOs) detect tension in tendons and inhibit contraction if tension is dangerous."
+        },
+        q5_2: {
+            requiredTerms: [
+                ['adrenaline', 'noradrenaline', 'hr', 'breathing'],
+                ['cortisol', 'glucose', 'catabolic', 'stress'],
+                ['testosterone', 'growth hormone', 'hgh', 'protein synthesis']
+            ],
+            modelAnswer: "Adrenaline/Noradrenaline: increase HR, BP, metabolic rate. Cortisol: increases blood glucose and breaks down tissue under stress. Testosterone & HGH: stimulate muscle tissue growth, protein synthesis, and fatty acid mobilisation."
+        },
+        q6_1: {
+            requiredTerms: [
+                ['atp-pc', 'pc', 'phosphocreatine', 'creatine kinase', '10 seconds', '1 atp'],
+                ['lactic acid', 'glycolysis', 'sarcoplasm', '2 atp', '30s-3min', 'lactate'],
+                ['aerobic', 'krebs', 'electron transport', '38 atp', 'mitochondria', 'co2']
+            ],
+            modelAnswer: "ATP-PC: PC fuel, Creatine Kinase, 1 ATP, 0-10s, no waste. Lactic Acid: Glycogen fuel, Sarcoplasm, 2 ATP, 30s-3min, Lactic Acid/H+ causes fatigue (pH 6.5). Aerobic: Glycogen/Fat fuel, Mitochondria, 38 ATP, limitless duration, CO2 + H2O."
+        },
+        q6_2: {
+            requiredTerms: [
+                ['50m', 'atp-pc'],
+                ['350m', 'lactic acid', 'anaerobic glycolysis'],
+                ['700m', 'aerobic'],
+                ['100m', 'atp-pc', 'sprint finish']
+            ],
+            modelAnswer: "0-50m: ATP-PC system; 50-400m: Lactic Acid system; 400-1100m: Aerobic system; 1100-1400m: Lactic Acid system; Final 100m: ATP-PC system for sprint finish."
+        }
+    };
+
+    // Auto-save function
+    function autoSave() {
+        saveToLocalStorage(false);
+    }
+
+    function saveToLocalStorage(showToast) {
+        const data = {
+            studentName: document.getElementById('studentName').value,
+            answers: {}
+        };
+
+        for (let qKey in markingRules) {
+            const textarea = document.getElementById(qKey);
+            if (textarea) {
+                data.answers[qKey] = textarea.value;
+            }
+        }
+
+        localStorage.setItem('btec_unit1_revision', JSON.stringify(data));
+
+        const saveStatus = document.getElementById('saveStatus');
+        saveStatus.textContent = 'Saved at ' + new Date().toLocaleTimeString();
+
+        if (showToast) {
+            showNotification('Progress saved successfully to browser storage!');
+        }
+    }
+
+    function loadFromLocalStorage() {
+        const saved = localStorage.getItem('btec_unit1_revision');
+        if (saved) {
+            try {
+                const data = JSON.parse(saved);
+                if (data.studentName) document.getElementById('studentName').value = data.studentName;
+                if (data.answers) {
+                    for (let qKey in data.answers) {
+                        const textarea = document.getElementById(qKey);
+                        if (textarea) textarea.value = data.answers[qKey];
+                    }
+                }
+            } catch(e) {
+                console.error("Error loading saved data", e);
+            }
+        }
+    }
+
+    // Levenshtein distance for fuzzy matching/spelling tolerance
+    function levenshteinDistance(a, b) {
+        if (a.length === 0) return b.length;
+        if (b.length === 0) return a.length;
+        const matrix = [];
+        for (let i = 0; i <= b.length; i++) matrix[i] = [i];
+        for (let j = 0; j <= a.length; j++) matrix[0][j] = j;
+
+        for (let i = 1; i <= b.length; i++) {
+            for (let j = 1; j <= a.length; j++) {
+                if (b.charAt(i - 1) === a.charAt(j - 1)) {
+                    matrix[i][j] = matrix[i - 1][j - 1];
+                } else {
+                    matrix[i][j] = Math.min(
+                        matrix[i - 1][j - 1] + 1,
+                        matrix[i][j - 1] + 1,
+                        matrix[i - 1][j] + 1
+                    );
+                }
+            }
+        }
+        return matrix[b.length][a.length];
+    }
+
+    function matchesTermWithSpellingTolerance(text, targetTerm) {
+        const cleanText = text.toLowerCase();
+        const words = cleanText.split(/\W+/);
+        const target = targetTerm.toLowerCase();
+
+        // Exact substring match
+        if (cleanText.includes(target)) return true;
+
+        // Fuzzy match on individual words (allowing distance up to 2 for words >= 5 chars)
+        for (let word of words) {
+            if (word.length >= 4 && target.length >= 4) {
+                const dist = levenshteinDistance(word, target);
+                if (dist <= 2) return true;
+            }
+        }
+        return false;
+    }
+
+    // Interactive marking function
+    function markAllQuestions() {
+        let totalScore = 0;
+        let maxScore = Object.keys(markingRules).length;
+
+        for (let qKey in markingRules) {
+            const rule = markingRules[qKey];
+            const text = document.getElementById(qKey).value;
+            const fbBox = document.getElementById('fb_' + qKey.replace('q', ''));
+
+            let matchedCategories = 0;
+            let requiredCategoriesCount = rule.requiredTerms.length;
+
+            rule.requiredTerms.forEach(termGroup => {
+                let categoryMatched = false;
+                termGroup.forEach(term => {
+                    if (matchesTermWithSpellingTolerance(text, term)) {
+                        categoryMatched = true;
+                    }
+                });
+                if (categoryMatched) matchedCategories++;
+            });
+
+            fbBox.style.display = 'block';
+
+            if (matchedCategories === requiredCategoriesCount) {
+                totalScore++;
+                fbBox.className = 'feedback-box feedback-correct';
+                fbBox.innerHTML = '<strong>✓ Excellent (Full Marks)</strong> - Key concepts and terminology accurately included.<div class="model-answer"><strong>Model Answer:</strong> ' + rule.modelAnswer + '</div>';
+            } else if (matchedCategories > 0) {
+                totalScore += 0.5;
+                fbBox.className = 'feedback-box feedback-partial';
+                fbBox.innerHTML = '<strong>~ Partially Correct (' + matchedCategories + '/' + requiredCategoriesCount + ' criteria)</strong> - Good attempt! Check missing terms.<div class="model-answer"><strong>Model Answer / Expected Content:</strong> ' + rule.modelAnswer + '</div>';
+            } else {
+                fbBox.className = 'feedback-box feedback-incorrect';
+                fbBox.innerHTML = '<strong>✗ Revisit Concept</strong> - Key required terms missing.<div class="model-answer"><strong>Model Answer:</strong> ' + rule.modelAnswer + '</div>';
+            }
+        }
+
+        const overallDiv = document.getElementById('overallScore');
+        overallDiv.style.display = 'block';
+        const percentage = Math.round((totalScore / maxScore) * 100);
+        const studentName = document.getElementById('studentName').value || 'Student';
+        overallDiv.innerHTML = `Assessment Results for ${studentName}: ${totalScore} / ${maxScore} (${percentage}%)`;
+
+        window.scrollTo({ top: overallDiv.offsetTop - 20, behavior: 'smooth' });
+    }
+
+    function showNotification(msg) {
+        const bar = document.getElementById('statusBar');
+        bar.textContent = msg;
+        bar.style.display = 'block';
+        setTimeout(() => { bar.style.display = 'none'; }, 3000);
+    }
+
+    function downloadJSON() {
+        const saved = localStorage.getItem('btec_unit1_revision');
+        if (!saved) {
+            alert('No saved progress found.');
+            return;
+        }
+        const blob = new Blob([saved], { type: 'application/json' });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = (document.getElementById('studentName').value || 'Student') + '_BTEC_Unit1_Revision.json';
+        a.click();
+    }
+
+    function downloadSummaryHTML() {
+        let name = document.getElementById('studentName').value || 'Student';
+        let html = `<html><head><title>BTEC Unit 1 Revision Report - ${name}</title><style>body{font-family:Arial;padding:20px;} h1{color:#0056b3;} .q{margin-bottom:15px;padding:10px;border:1px solid #ccc;}</style></head><body>`;
+        html += `<h1>BTEC Sport Science Unit 1 Learning Aim A - Student Revision Report</h1>`;
+        html += `<p><strong>Student Name:</strong> ${name}</p>`;
+        html += `<p><strong>Date Completed:</strong> ${new Date().toLocaleDateString()}</p><hr>`;
+
+        for (let qKey in markingRules) {
+            let val = document.getElementById(qKey).value;
+            let qTitle = document.querySelector('#' + qKey).previousElementSibling.previousElementSibling.textContent;
+            html += `<div class="q"><strong>${qTitle}</strong><br><em>Student Answer:</em><p>${val || 'No answer provided.'}</p></div>`;
+        }
+
+        html += `</body></html>`;
+
+        const blob = new Blob([html], { type: 'text/html' });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = name + '_BTEC_Unit1_Revision_Report.html';
+        a.click();
+    }
+
+    function openGoogleDoc() {
+        window.open("https://docs.google.com/document/d/1zYWP_78vCHe0eD6poYzTj77WEF0RU4qEZKkjzmm8Xj0/edit?usp=drive_web", "_blank");
+    }
+
+    // Load saved progress on page start
+    window.onload = function() {
+        loadFromLocalStorage();
+    };
+</script>
+
+</body>
+</html>
